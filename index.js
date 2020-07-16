@@ -46,6 +46,9 @@ function promptUser() {
             case "View All Employees By Department":
                 depSearch()
                 break;
+                case "View All Emplyees By Manager":
+                managerSearch()
+                break;
             case "Add Department":
                 addDep()
                 break;
@@ -62,6 +65,44 @@ function promptUser() {
     })
 }
 
+// ALL EMPLOYEE SEARCH
+function empSearch() {
+    var query = "SELECT * FROM employee";
+
+    connection.query(query, function(err, res) {
+    if (err) throw err;
+
+    console.table('All Employees:', res); 
+
+    promptUser();
+    })
+}
+
+// EMPLOYEE BY DEPARTMENT SEARCH
+function depSearch() {
+    var query = "SELECT * FROM department";
+
+    connection.query(query, function(err, res) {
+    if(err)throw err;
+
+    console.table('All Departments:', res);
+
+    promptUser();
+    })
+}
+
+// VIEW ALL EMPLOYEES BY MANAGER
+function managerSearch() {
+
+    var query = "SELECT * FROM role";
+
+    connection.query(query, function(err, res){
+    if (err) throw err;
+
+    console.table('All roles:', res);
+    promptUser();
+    })
+}
 // ADD NEW DEPARTMENT
 function addDep() {
 
@@ -130,6 +171,7 @@ function addRole() {
 
 }
 
+// ADD EMPLOYEE NOT COMPLETE
 function addEmployee() {
 
     connection.query("SELECT * FROM role", function (err, res) {
